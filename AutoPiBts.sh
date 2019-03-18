@@ -40,7 +40,7 @@ sudo apt-get install software-properties-common
 echo -e "\e[1;32mINSTALL LOGISTICAL DEPENDENCIES\e[0m"
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections ## Thanks To:
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections ## https://gist.github.com/alonisser/a2c19f5362c2091ac1e7
-apt-get install -y git python-setuptools python-dev swig libccid pcscd pcsc-tools python-pyscard libpcsclite1 unzip firefox-esr xserver-xorg lightdm xfce4 cmake automake matchbox-keyboard iptables-persistent
+apt-get install -y git python-setuptools python-dev swig libccid pcscd pcsc-tools python-pyscard libpcsclite1 unzip xserver-xorg lightdm xfce4 cmake automake matchbox-keyboard iptables-persistent
 apt-get install autoconf -y
 apt-get install libgsm1-dev -y
 apt-get install subversion -y
