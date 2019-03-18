@@ -46,6 +46,8 @@ apt-get install libgsm1-dev -y
 apt-get install subversion -y
 apt-get install libgusb-dev -y 
 
+apt autoremove
+
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
 cd /usr/src
 git clone git://git.osmocom.org/pysim pysim
