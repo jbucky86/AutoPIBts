@@ -89,8 +89,8 @@ svn checkout http://voip.null.ro/svn/yatebts/trunk yatebts
 cd yatebts
 ./autogen.sh
 ./configure --prefix=/usr/local
-svn patch --strip 1 --dry-run ~/MSpatch.patch
-svn patch --strip 1 ~/MSpatch.patch
+svn patch --strip 1 --dry-run ~/yatebts-5.0.0-gcc6.patch
+svn patch --strip 1 ~/yatebts-5.0.0-gcc6.patch
 ./autogen.sh
 ./configure --prefix=/usr/local
 make install > /var/log/YateBTS_install.log
