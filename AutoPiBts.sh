@@ -51,7 +51,6 @@ apt-get install libgsm1-dev -y
 apt-get install subversion -y
 apt-get install libgusb-dev -y 
 apt-get install software-properties-common -y
-apt install -y libusb-1.0-0-dev
 
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
 cd /usr/src
@@ -74,23 +73,22 @@ apt-get install libbladerf-dev -y
 apt-get install bladerf-firmware-fx3 -y
 apt-get install bladerf-fpga-hostedx40 -y
 
+apt install -y libusb-1.0-0-dev
+
 #INSTALL Yate & YateBTS
 echo -e "\e[1;32mINSTALL Yate & YateBTS\e[0m"
-mkdir ~/tools
-cd ~/tools
+mkdir /home/pi/tools
+cd /home/pi/tools
 svn checkout http://voip.null.ro/svn/yate/trunk yate
 cd yate
 ./autogen.sh
 ./configure --prefix=/usr/local
 make install-noapi > /var/log/Yate_install.log
 ldconfig
-cd ~/tools
+cd /home/pi/tools
 svn checkout http://voip.null.ro/svn/yatebts/trunk yatebts
 cd yatebts
-./autogen.sh
-./configure --prefix=/usr/local
-svn patch --strip 1 --dry-run ~/yatebts-5.0.0-gcc6.patch
-svn patch --strip 1 ~/yatebts-5.0.0-gcc6.patch
+svn patch --strip 1 /home/pi/AutoPiBts/yatebts-5.0.0-gcc6.patch
 ./autogen.sh
 ./configure --prefix=/usr/local
 make install > /var/log/YateBTS_install.log
@@ -191,7 +189,7 @@ echo -e "\e[1;32mRunning Raspberry Pi Hardening Script\e[0m"
 # Update the operating system
 # Rationale:
 # Periodically patches contain security enhancements, bug fixes, and additional features for functionality.
-apt-get -y dist-upgrade
+#apt-get -y dist-upgrade
 
 # Enable sticky bit on all world writable directories
 # Rationale:
