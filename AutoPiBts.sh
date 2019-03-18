@@ -58,16 +58,16 @@ apt-get install -y apache2 php libusb-1.0-0 libgsm1
 apt-get install gcc -y
 
 add-apt-repository -y ppa:ondrej/php
-apt update
+apt update -y
 apt install php5.6 -y
 
 apt install -y libusb-1.0-0-dev
 
 INSTALL BladeRF
 echo -e "\e[1;32mINSTALL BladeRF\e[0m"
-add-apt-repository ppa:bladerf/bladerf
-apt-get update
-apt-get install bladerf
+add-apt-repository ppa:bladerf/bladerf -y
+apt-get update -y
+apt-get install bladerf -y 
 
 #INSTALL Yate & YateBTS
 echo -e "\e[1;32mINSTALL Yate & YateBTS\e[0m"
