@@ -1,7 +1,7 @@
 sudo apt install git -y
 
-git clone https://github.com/jbucky86/AutoPIBts.git 
+sudo git clone https://github.com/jbucky86/AutoPIBts.git 
 
-chmod 777 AutoPiBts.sh
+sudo chmod 777 AutoPiBts.sh
 
 ./AutoPiBts.sh
