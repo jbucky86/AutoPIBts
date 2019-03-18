@@ -1,3 +1,5 @@
+sudo su
+
 sudo apt install git -y
 
 sudo git clone https://github.com/jbucky86/AutoPiBts.git 
