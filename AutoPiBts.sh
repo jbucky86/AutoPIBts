@@ -63,28 +63,27 @@ apt install -y libusb-1.0-0-dev
 
 INSTALL BladeRF
 echo -e "\e[1;32mINSTALL BladeRF\e[0m"
-sudo add-apt-repository ppa:bladerf/bladerf
-$ sudo apt-get update
-$ sudo apt-get install bladerf
+add-apt-repository ppa:bladerf/bladerf
+apt-get update
+apt-get install bladerf
 
 #INSTALL Yate & YateBTS
 echo -e "\e[1;32mINSTALL Yate & YateBTS\e[0m"
-mkdir ~/tools/
-cd ~/tools/
+mkdir ~/tools
+cd ~/tools
 svn checkout http://voip.null.ro/svn/yate/trunk yate
 cd yate
 ./autogen.sh
 ./configure --prefix=/usr/local
 make install-noapi > /var/log/Yate_install.log
 ldconfig
-cd ~/tools/
+cd ~/tools
 svn checkout http://voip.null.ro/svn/yatebts/trunk yatebts
 cd yatebts
-svn patch --strip 1 --dry-run ~/MSpatch.patch
-svn patch --strip 1 ~/MSpatch.patch
-Svn diff
 ./autogen.sh
 ./configure --prefix=/usr/local
+svn patch --strip 1 --dry-run ~/MSpatch.patch
+svn patch --strip 1 ~/MSpatch.patch
 make install > /var/log/YateBTS_install.log
 ldconfig
 
