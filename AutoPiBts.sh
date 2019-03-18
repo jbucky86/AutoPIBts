@@ -63,6 +63,7 @@ apt-get install -y apache2 libgsm1
 add-apt-repository -y ppa:ondrej/php
 apt update -y
 apt install php5.6 -y
+apt install php -y
 
 #INSTALL BladeRF
 echo -e "\e[1;32mINSTALL BladeRF\e[0m"
