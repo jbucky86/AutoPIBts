@@ -25,28 +25,33 @@ if [ -z $networkname ] ; then
 	networkname="DuaneDunstonRF"
 	fi
 echo -e "\e[1mThe network name is, \e[35m$networkname\e[0m"
+#Confirm network name
+echo -ne "\e[1mIs that correct? (y/n): \e[0m"
+read confirm;
+if [ $confirm = "y" -o $confirm =  "Y" ] ; then
+	echo -e "\e[32mNetwork name confirmed!\e[0m"
+else
+	echo -e "\e[31mNetwork name incorrect, Please run me again!\e[0m"
+	exit
+fi
 
 #UPDATE & UPGRADE THE SYSTEM
 echo -e "\e[1;32mStart Time: \e[0m `date -u`"
 starttime=`date -u`
 SECONDS=0
 echo -e "\e[1;32mUPDATE & UPGRADE THE SYSTEM\e[0m"
-apt-get -y update
-#&& apt-get -y upgrade
-
-sudo apt-get install software-properties-common
+#apt-get -y update && apt-get -y upgrade
 
 #INSTALL LOGISTICAL DEPENDENCIES
 echo -e "\e[1;32mINSTALL LOGISTICAL DEPENDENCIES\e[0m"
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections ## Thanks To:
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections ## https://gist.github.com/alonisser/a2c19f5362c2091ac1e7
-apt-get install -y git python-setuptools python-dev swig libccid pcscd pcsc-tools python-pyscard libpcsclite1 unzip xserver-xorg lightdm xfce4 cmake automake matchbox-keyboard iptables-persistent
 apt-get install autoconf -y
 apt-get install libgsm1-dev -y
 apt-get install subversion -y
 apt-get install libgusb-dev -y 
-
-apt autoremove
+apt-get install software-properties-common -y
+apt install -y libusb-1.0-0-dev
 
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
 cd /usr/src
@@ -54,20 +59,20 @@ git clone git://git.osmocom.org/pysim pysim
 
 #INSTALL Apache, PHP, GCC, and USB dependencies
 echo -e "\e[1;32mINSTALL Apache, PHP, and USB dependencies\e[0m"
-apt-get install -y apache2 php libusb-1.0-0 libgsm1 
-apt-get install gcc -y
+apt-get install -y apache2 libgsm1 
 
 add-apt-repository -y ppa:ondrej/php
 apt update -y
 apt install php5.6 -y
 
-apt install -y libusb-1.0-0-dev
-
-INSTALL BladeRF
+#INSTALL BladeRF
 echo -e "\e[1;32mINSTALL BladeRF\e[0m"
 add-apt-repository ppa:bladerf/bladerf -y
 apt-get update -y
 apt-get install bladerf -y 
+apt-get install libbladerf-dev -y
+apt-get install bladerf-firmware-fx3 -y
+apt-get install bladerf-fpga-hostedx40 -y
 
 #INSTALL Yate & YateBTS
 echo -e "\e[1;32mINSTALL Yate & YateBTS\e[0m"
@@ -96,7 +101,7 @@ ldconfig
 cd /var/www/html
 ln -s /usr/local/share/yate/nib_web nib
 #Permission changes
-chmod -R a+w /usr/local/etc/yate
+chmod -R a+rw /usr/local/etc/yate
 
 #Update PySim Path for Web GUI
 pypath="/var/www/html/nib/config.php"
@@ -106,7 +111,7 @@ echo `cat $pypath`
 echo "##### END PySim #####"
 
 #Create Desktop Startup Script
-echo -e "\e[1;32mCreating Desktop Startup Script\e[0m"
+
 scriptpath="/home/pi/StartYateBTS.sh"
 tee $scriptpath > /dev/null <<EOF
 #!/bin/bash
