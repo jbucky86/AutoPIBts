@@ -1,6 +1,6 @@
 sudo apt install git -y
 
-sudo git clone https://github.com/jbucky86/AutoPIBts.git 
+sudo git clone https://github.com/jbucky86/AutoPiBts.git 
 
 cd AutoPiBts
 
