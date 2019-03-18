@@ -113,7 +113,7 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 yate -s &
-firefox-esr http://localhost/nib &
+#firefox-esr http://localhost/nib &
 EOF
 echo "##### BEGIN StartYateBTS.sh #####"
 echo `cat $scriptpath`
