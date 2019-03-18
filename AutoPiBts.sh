@@ -31,7 +31,8 @@ echo -e "\e[1;32mStart Time: \e[0m `date -u`"
 starttime=`date -u`
 SECONDS=0
 echo -e "\e[1;32mUPDATE & UPGRADE THE SYSTEM\e[0m"
-apt-get -y update && apt-get -y upgrade
+apt-get -y update
+#&& apt-get -y upgrade
 
 sudo apt-get install software-properties-common
 
