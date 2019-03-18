@@ -45,23 +45,10 @@ apt-get install autoconf -y
 apt-get install libgsm1-dev -y
 apt-get install subversion -y
 apt-get install libgusb-dev -y 
+
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
 cd /usr/src
-#   git clone git://git.osmocom.org/pysim pysim
-wget https://github.com/osmocom/pysim/archive/2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
-unzip 2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
-cd pysim-2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a
-rm README
-rm COPYING
-mkdir ../pysim
-mv * ../pysim
-cd ../
-rm 2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
-rm -rf pysim-2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a
-cd /usr/local/bin
-ln -s /usr/src/pysim/pySim-prog.py pySim-prog.py
-pySIM_Path=`which pySim-prog.py`
-echo -e "\e[1;32mPySIM Installed To: $pySIM_Path\e[0m"
+git clone git://git.osmocom.org/pysim pysim
 
 #INSTALL Apache, PHP, GCC, and USB dependencies
 echo -e "\e[1;32mINSTALL Apache, PHP, and USB dependencies\e[0m"
@@ -76,29 +63,9 @@ apt install -y libusb-1.0-0-dev
 
 INSTALL BladeRF
 echo -e "\e[1;32mINSTALL BladeRF\e[0m"
-cd /tmp
-wget -c https://github.com/Nuand/bladeRF/archive/master.zip
-unzip master.zip
-cd bladeRF-master
-cd host
-mkdir build
-cd build
-echo `cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DINSTALL_UDEV_RULES=ON ../`
-make -j4
-make install > /var/log/BladeRF_install.log
-ldconfig
-#if dmesg | grep -q bladeRF; then
-#    echo -e "\e[1;32mBladeRF Successfully Detected!\e[0m"
-#else
-#    echo -e "\e[1;32mBladeRF Was Not Detected!\e[0m"
-#    read -n1 -r -p "Please connect the BladeRF...then press any key to continue..."
-#    if dmesg | grep -q bladeRF; then
-#        echo -e "\e[1;32mBladeRF Successfully Detected!\e[0m"
-#    else
-#        echo -e "\e[1;32mBladeRF Was Not Detected! Exiting Script...\e[0m"
-#        exit
-#    fi
-#fi
+sudo add-apt-repository ppa:bladerf/bladerf
+$ sudo apt-get update
+$ sudo apt-get install bladerf
 
 #INSTALL Yate & YateBTS
 echo -e "\e[1;32mINSTALL Yate & YateBTS\e[0m"
@@ -120,8 +87,6 @@ Svn diff
 ./configure --prefix=/usr/local
 make install > /var/log/YateBTS_install.log
 ldconfig
-
-rm -rf ~/MSpatch.patch
 
 #Setup Network In a Box Interface
 #Link website directory
