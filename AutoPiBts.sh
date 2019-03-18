@@ -86,6 +86,8 @@ cd yatebts
 ./configure --prefix=/usr/local
 svn patch --strip 1 --dry-run ~/MSpatch.patch
 svn patch --strip 1 ~/MSpatch.patch
+./autogen.sh
+./configure --prefix=/usr/local
 make install > /var/log/YateBTS_install.log
 ldconfig
 
