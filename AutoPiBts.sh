@@ -1,5 +1,5 @@
 #!/bin/bash
-#Matthew May edited by Bucky for updated verison of yateBTS
+#Matthew May edited by Bucky for updated verison of yateBTS (currently working on Raspbian Stretch Lite 14.4 and yateBTS 6.1.1)
 #Portable Cell Network Setup Script v2.1
 
 raspi-config nonint do_ssh 0
@@ -100,14 +100,14 @@ ldconfig
 #Setup Network In a Box Interface
 #Link website directory
 cd /var/www/html
-ln -s /usr/local/share/yate/nib_web nib
+ln -s /usr/local/share/yate/nipc_web nipc_web
 #Permission changes
 chmod -R a+rw /usr/local/etc/yate
 
 #Update PySim Path for Web GUI
-chmod -R a+rw /var/www/html/nib/config.php
-pypath="/var/www/html/nib/config.php"
-sed -i '/<?php/ c\<?php\n$pysim_path = "/usr/local/bin";' $pypath
+chmod -R a+rw /var/www/html/nipc_web/config.php
+pypath="/var/www/html/nipc_web/config.php"
+sed -i '/<?php/ c\<?php\n$pysim_path = "/usr/src";' $pypath
 echo "##### BEGIN PySim #####"
 echo `cat $pypath`
 echo "##### END PySim #####"
@@ -123,7 +123,6 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 yate -s &
-#firefox-esr http://localhost/nib &
 EOF
 echo "##### BEGIN StartYateBTS.sh #####"
 echo `cat $scriptpath`
@@ -166,9 +165,9 @@ echo "##### VERIFIED YBTS.CONF #####"
 #Update Welcome Message
 cd /usr/local/share/yate/scripts
 sed -i '/var msg_text/ c\var msg_text = "Welcome to '$networkname'. Your number is: "+msisdn+". **THIS NETWORK IS FOR AUTHORIZED USE ONLY**";' nib.js
-echo "##### BEGIN nib.js #####"
-echo `cat nib.js | grep msg_text`
-echo "##### END nib.js #####"
+echo "##### BEGIN nipc.js #####"
+echo `cat nipc.js | grep msg_text`
+echo "##### END nipc.js #####"
 
 #Update Yate Subscribers
 yate_subscribers="/usr/local/etc/yate/subscribers.conf"
@@ -193,7 +192,7 @@ echo -e "\e[1;32mRunning Raspberry Pi Hardening Script\e[0m"
 # Update the operating system
 # Rationale:
 # Periodically patches contain security enhancements, bug fixes, and additional features for functionality.
-#apt-get -y dist-upgrade
+apt-get -y dist-upgrade
 
 # Enable sticky bit on all world writable directories
 # Rationale:
