@@ -70,13 +70,20 @@ apt install php -y
 #INSTALL BladeRF
 echo -e "\e[1;32mINSTALL BladeRF\e[0m"
 add-apt-repository ppa:bladerf/bladerf -y
-apt-get update -y
+apt-get update -y #you may get some 404s but it’s ok
 apt-get install bladerf -y 
 apt-get install libbladerf-dev -y
 apt-get install bladerf-firmware-fx3 -y
-apt-get install bladerf-fpga-hostedx40 -y
-
-apt install -y libusb-1.0-0-dev
+apt-get install bladerf-fpga-hostedx40 -y #for the 40 kLE hardware
+#apt-get install bladerf-fpga-hostedx115 -y #for the 115 kLE hardware
+apt install -y libusb-1.0-0-dev -y
+#Plug in the BladeRF for flashing
+#bladeRF-cli --flash-
+#firmware /usr/share/Nuand/bladeRF/bladeRF_fw.img
+#Check bladerf
+#bladeRF-cli -p
+#bladeRF-cli -i
+#bladeRF> verison
 
 #INSTALL Yate & YateBTS
 echo -e "\e[1;32mINSTALL Yate & YateBTS\e[0m"
