@@ -57,6 +57,10 @@ pip install pytlv -y
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
 cd /usr/src
 git clone git://git.osmocom.org/pysim pysim
+cd /usr/local/bin
+ln -s /usr/src/pysim/pySim-prog.py pySim-prog.py
+pySIM_Path=`which pySim-prog.py`
+echo -e "\e[1;32mPySIM Installed To: $pySIM_Path\e[0m"
 
 #INSTALL Apache, PHP, GCC, and USB dependencies
 echo -e "\e[1;32mINSTALL Apache, PHP, and USB dependencies\e[0m"
@@ -107,22 +111,20 @@ make install > /var/log/YateBTS_install.log
 ldconfig
 
 #Setup Network In a Box Interface
+echo -e "\e[1;32mSetup Network In a Box Interface (NIB)\e[0m"
 #Link website directory
 cd /var/www/html
 ln -s /usr/local/share/yate/nipc_web nipc_web
 #Permission changes
 chmod -R a+rw /usr/local/etc/yate
-
 #Update PySim Path for Web GUI
-chmod -R a+rw /var/www/html/nipc_web/config.php
 pypath="/var/www/html/nipc_web/config.php"
 sed -i '/<?php/ c\<?php\n$pysim_path = "/usr/src";' $pypath
 echo "##### BEGIN PySim #####"
 echo `cat $pypath`
 echo "##### END PySim #####"
-
 #Create Desktop Startup Script
-
+echo -e "\e[1;32mCreating Desktop Startup Script\e[0m"
 scriptpath="/home/pi/StartYateBTS.sh"
 tee $scriptpath > /dev/null <<EOF
 #!/bin/bash
