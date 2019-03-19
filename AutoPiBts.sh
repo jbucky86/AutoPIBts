@@ -51,6 +51,8 @@ apt-get install libgsm1-dev -y
 apt-get install subversion -y
 apt-get install libgusb-dev -y 
 apt-get install software-properties-common -y
+apt-get install python-pyscard python-serial python-pip -y
+pip install pytlv -y
 
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
 cd /usr/src
@@ -103,6 +105,7 @@ ln -s /usr/local/share/yate/nib_web nib
 chmod -R a+rw /usr/local/etc/yate
 
 #Update PySim Path for Web GUI
+chmod -R a+rw /var/www/html/nib/config.php
 pypath="/var/www/html/nib/config.php"
 sed -i '/<?php/ c\<?php\n$pysim_path = "/usr/local/bin";' $pypath
 echo "##### BEGIN PySim #####"
