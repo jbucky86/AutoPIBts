@@ -76,6 +76,8 @@ apt-get install libbladerf-dev -y
 apt-get install bladerf-firmware-fx3 -y
 apt-get install bladerf-fpga-hostedx40 -y #for the 40 kLE hardware
 #apt-get install bladerf-fpga-hostedx115 -y #for the 115 kLE hardware
+#apt-get install bladerf-fpga-hostedxA4 -y #for the A9 hardware
+#apt-get install bladerf-fpga-hostedxA9 -y #for the A9 hardware
 apt install -y libusb-1.0-0-dev -y
 #Plug in the BladeRF for flashing
 #bladeRF-cli --flash-
