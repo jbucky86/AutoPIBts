@@ -63,15 +63,9 @@ apt-get install libpcsclite1 -y
 pip install pytlv -y
 
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
-#echo -e "\e[1;32mPySIM Insatll\e[0m"
-#cd /usr/src
-#git clone git://git.osmocom.org/pysim pysim
-#cd /usr/local/bin
-#ln -s /usr/src/pysim/pySim-prog.py pySim-prog.py
-#pySIM_Path=`which pySim-prog.py`
-#echo -e "\e[1;32mPySIM Installed To: $pySIM_Path\e[0m"
+echo -e "\e[1;32mPySIM Insatll\e[0m"
 cd /usr/src
-#   git clone git://git.osmocom.org/pysim pysim
+#   git clone git://git.osmocom.org/pysim pysim ### this is broken cant see my reader anyway
 wget https://github.com/osmocom/pysim/archive/2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
 unzip 2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
 cd pysim-2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a
