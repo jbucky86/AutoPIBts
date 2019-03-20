@@ -152,7 +152,7 @@ ln -s /usr/local/share/yate/nipc_web nipc_web
 chmod -R a+rw /usr/local/etc/yate
 #Update PySim Path for Web GUI
 pypath="/var/www/html/nipc_web/config.php"
-sed -i '/<?php/ c\<?php\n$pysim_path = "/usr/src";' $pypath
+sed -i '/<?php/ c\<?php\n$pysim_path = "/usr/local/bin";' $pypath
 echo "##### BEGIN PySim #####"
 echo `cat $pypath`
 echo "##### END PySim #####"
