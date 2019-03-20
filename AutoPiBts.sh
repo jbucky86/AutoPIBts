@@ -3,7 +3,7 @@
 #Portable Cell Network Setup Script v2.1
 
 raspi-config nonint do_ssh 0
-#raspi-config nonint do_expand_rootfs
+
 raspi-config nonint do_hostname PiBTS
 
 #Display welcome header
@@ -40,7 +40,7 @@ echo -e "\e[1;32mStart Time: \e[0m `date -u`"
 starttime=`date -u`
 SECONDS=0
 echo -e "\e[1;32mUPDATE & UPGRADE THE SYSTEM\e[0m"
-#apt-get -y update && apt-get -y upgrade
+apt-get -y update #&& apt-get -y upgrade
 
 #INSTALL LOGISTICAL DEPENDENCIES
 echo -e "\e[1;32mINSTALL LOGISTICAL DEPENDENCIES\e[0m"
@@ -52,11 +52,36 @@ apt-get install subversion -y
 apt-get install libgusb-dev -y 
 apt-get install software-properties-common -y
 apt-get install python-pyscard python-serial python-pip -y
+apt-get install python-setuptools -y  
+apt-get install python-dev -y  
+apt-get install swig -y 
+apt-get install libccid -y 
+apt-get install pcscd -y 
+apt-get install pcsc-tools -y 
+apt-get install python-pyscard -y 
+apt-get install libpcsclite1 -y 
 pip install pytlv -y
 
 #Setup PySIM - If PySIM current version worked we would use this method commented. Falling back to old commit for intended operation
+#echo -e "\e[1;32mPySIM Insatll\e[0m"
+#cd /usr/src
+#git clone git://git.osmocom.org/pysim pysim
+#cd /usr/local/bin
+#ln -s /usr/src/pysim/pySim-prog.py pySim-prog.py
+#pySIM_Path=`which pySim-prog.py`
+#echo -e "\e[1;32mPySIM Installed To: $pySIM_Path\e[0m"
 cd /usr/src
-git clone git://git.osmocom.org/pysim pysim
+#   git clone git://git.osmocom.org/pysim pysim
+wget https://github.com/osmocom/pysim/archive/2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
+unzip 2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
+cd pysim-2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a
+rm README
+rm COPYING
+mkdir ../pysim
+mv * ../pysim
+cd ../
+rm 2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a.zip
+rm -rf pysim-2fc205ceb93a8c58d6ad88d3bfd6aa84c628514a
 cd /usr/local/bin
 ln -s /usr/src/pysim/pySim-prog.py pySim-prog.py
 pySIM_Path=`which pySim-prog.py`
