@@ -135,8 +135,16 @@ svn patch --strip 1 /home/pi/AutoPiBts/yatebts-5.0.0-gcc6.patch
 make install > /var/log/YateBTS_install.log
 ldconfig
 
+#Start YateBTS on boot via rc.local
+echo -e "\e[1;32mSetup rc.local to boot yateBTS on Boot\e[0m"
+rcpath="/etc/rc.local"
+sed -i '/# By default this script does nothing./ c\# By default this script does nothing.\nsudo ./StartYateBTS -i' $rcpath
+echo "##### BEGIN rc.local #####"
+echo `cat $rcpath`
+echo "##### END rc.local #####"
+
 #Setup Network In a Box Interface
-echo -e "\e[1;32mSetup Network In a Box Interface (NIB)\e[0m"
+echo -e "\e[1;32mSetup Network In a Box Interface (NIPC)\e[0m"
 #Link website directory
 cd /var/www/html
 ln -s /usr/local/share/yate/nipc_web nipc_web
